@@ -4,8 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
 
-const publicDirectory = path.join(__dirname, 'client/build');
-app.use(express.static(publicDirectory));
+const publicDirectory = path.join(__dirname, '../client/build');
 
 require('dotenv').config();
 
@@ -16,6 +15,7 @@ const app = express();
 //! app.use(cors()) MUST be BEFORE using routers
 app.use(cors());
 app.use(express.json());
+app.use(express.static(publicDirectory));
 app.use('/api/users', userRouter);
 
 const uri = process.env.ATLAS_URI;
