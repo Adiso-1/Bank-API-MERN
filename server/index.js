@@ -2,6 +2,10 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
+
+const publicDirectory = path.join(__dirname, 'client/build');
+app.use(express.static(publicDirectory));
 
 require('dotenv').config();
 
