@@ -1,10 +1,10 @@
 {
-	"name": "bank-api-react-MERN",
+	"name": "bank-api-react-mern",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "npm start --prefix api",
+		"start": "npm start --prefix server",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm install --prefix server"
 	},
 	"keywords": [],
