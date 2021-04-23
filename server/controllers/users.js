@@ -10,10 +10,12 @@ const getUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-	const _id = req.params.id;
+	const passport_id = req.params.id;
 	try {
-		const user = await User.findById(_id);
-		res.status(200).json(user);
+		if (passport_id) {
+			const user = await User.find({ passport_id });
+			res.status(200).json(user);
+		}
 	} catch (error) {
 		res.status(404).json({ message: error.message });
 	}

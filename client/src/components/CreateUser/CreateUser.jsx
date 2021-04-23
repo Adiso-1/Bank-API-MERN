@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../../api/api';
-import './Form.css';
+import './CreateUser.css';
 
 const Form = () => {
 	const [userData, setUserData] = useState({
@@ -8,18 +8,12 @@ const Form = () => {
 		name: '',
 		email: '',
 	});
-
-	// const handleClick = (e) => {
-	// 	console.log(userData);
-	// };
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(__dirname);
 		try {
-			const { data } = await api.post('users', userData);
-			console.log(data);
+			await api.post('users', userData);
 			setUserData({
-				passportId: '',
+				passport_id: '',
 				name: '',
 				email: '',
 			});

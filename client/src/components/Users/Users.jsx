@@ -1,34 +1,73 @@
 import React, { useEffect, useState } from 'react';
-import Form from '../Form/Form';
+import CreateForm from '../CreateUser/CreateUser';
+import GetUser from '../GetUser/GetUser';
 import api from '../../api/api';
+import Button from '../Button/Button';
+import './Users.css';
 
 const Users = () => {
+	const [isAddUser, setIsAddUser] = useState(false);
+	const [isShowUsers, setIsShowUsers] = useState(false);
+	const [isGetUser, setIsGetUser] = useState(false);
 	const [users, setUsers] = useState([]);
 
 	const getUsers = async () => {
 		const { data } = await api.get(`users`);
 		setUsers(data);
-		console.log(data);
 	};
+
 	useEffect(() => {
-		console.log(process.env.NODE_ENV);
 		getUsers();
 	}, []);
 
+	const handleCreate = () => {
+		setIsAddUser(!isAddUser);
+		setIsShowUsers(false);
+	};
+	const handleShowUsers = () => {
+		setIsShowUsers(!isShowUsers);
+		setIsAddUser(false);
+	};
+	const handleGetUser = () => {
+		setIsGetUser(!isGetUser);
+	};
+
 	return (
 		<div>
-			<Form />
-			{users.map((user) => {
-				return (
-					<div key={user._id} className="users-list">
-						<ul>
-							<li>{user.passport_id}</li>
-							<li>{user.name}</li>
-							<li>{user.email}</li>
-						</ul>
-					</div>
-				);
-			})}
+			<div className="buttons">
+				<Button
+					text={isAddUser ? 'Close add user' : 'Add new user'}
+					onClick={handleCreate}
+				/>
+				<Button
+					text={isShowUsers ? 'Close users' : 'Show all users'}
+					onClick={handleShowUsers}
+				/>
+				<Button
+					text={isGetUser ? 'Close Search User' : 'Search user'}
+					onClick={handleGetUser}
+				/>
+			</div>
+			{isGetUser && <GetUser />}
+			{isAddUser && <CreateForm />}
+			<div className="grid-list">
+				{(isShowUsers &&
+					users.length > 0 &&
+					users.map((user) => {
+						return (
+							<div key={user._id}>
+								<ul className="users-list">
+									<li>ID: {user.passport_id}</li>
+									<li>Name: {user.name}</li>
+									<li>Email: {user.email}</li>
+									<li>Cash: {user.cash}</li>
+									<li>Credit: {user.credit}</li>
+								</ul>
+							</div>
+						);
+					})) ||
+					(isShowUsers && <h1>No Users In The Bank</h1>)}
+			</div>
 		</div>
 	);
 };
