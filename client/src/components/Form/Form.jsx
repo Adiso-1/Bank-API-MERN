@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../../api/api';
 import './Form.css';
 
 const Form = () => {
@@ -13,19 +13,16 @@ const Form = () => {
 	// 	console.log(userData);
 	// };
 	const handleSubmit = async (e) => {
-		// e.preventDefault();
+		e.preventDefault();
+		console.log(__dirname);
 		try {
-			const { data } = await axios.post(
-				'http://localhost:5000/api/users',
-				userData
-			);
+			const { data } = await api.post('users', userData);
 			console.log(data);
 			setUserData({
 				passportId: '',
 				name: '',
 				email: '',
 			});
-			console.log(userData);
 		} catch (error) {
 			console.log('Error: ' + error);
 		}
@@ -37,6 +34,7 @@ const Form = () => {
 			<label htmlFor="passport-id">Passport ID</label>
 			<input
 				value={userData.lname}
+				required={true}
 				onChange={(e) =>
 					setUserData({ ...userData, passport_id: e.target.value })
 				}
@@ -46,6 +44,7 @@ const Form = () => {
 
 			<label htmlFor="name">Name</label>
 			<input
+				required={true}
 				value={userData.fname}
 				onChange={(e) => setUserData({ ...userData, name: e.target.value })}
 				id="name"
@@ -55,6 +54,7 @@ const Form = () => {
 			<label htmlFor="email">Email</label>
 			<input
 				value={userData.email}
+				required={true}
 				onChange={(e) => setUserData({ ...userData, email: e.target.value })}
 				id="email"
 				type="text"

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Form from '../Form/Form';
+import api from '../../api/api';
 
 const Users = () => {
 	const [users, setUsers] = useState([]);
 
 	const getUsers = async () => {
-		const { data } = await axios.get('http://localhost:5000/api/users/');
+		const { data } = await api.get(`users`);
 		setUsers(data);
 		console.log(data);
 	};
 	useEffect(() => {
+		console.log(process.env.NODE_ENV);
 		getUsers();
 	}, []);
 
