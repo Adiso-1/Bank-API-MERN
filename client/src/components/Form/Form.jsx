@@ -4,16 +4,31 @@ import './Form.css';
 
 const Form = () => {
 	const [userData, setUserData] = useState({
-		passportId: '',
+		passport_id: '',
 		name: '',
 		email: '',
 	});
 
-	const handleClick = (e) => {
-		console.log(userData);
-	};
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	// const handleClick = (e) => {
+	// 	console.log(userData);
+	// };
+	const handleSubmit = async (e) => {
+		// e.preventDefault();
+		try {
+			const { data } = await axios.post(
+				'http://localhost:5000/api/users',
+				userData
+			);
+			console.log(data);
+			setUserData({
+				passportId: '',
+				name: '',
+				email: '',
+			});
+			console.log(userData);
+		} catch (error) {
+			console.log('Error: ' + error);
+		}
 	};
 	return (
 		<form className="form-container" onSubmit={handleSubmit}>
@@ -23,7 +38,7 @@ const Form = () => {
 			<input
 				value={userData.lname}
 				onChange={(e) =>
-					setUserData({ ...userData, passportId: e.target.value })
+					setUserData({ ...userData, passport_id: e.target.value })
 				}
 				id="passport-id"
 				type="text"
@@ -45,9 +60,7 @@ const Form = () => {
 				type="text"
 			/>
 
-			<button onClick={(e) => handleClick(e)} type="submit">
-				Submit
-			</button>
+			<button type="submit">Submit</button>
 		</form>
 	);
 };

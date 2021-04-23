@@ -20,8 +20,10 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
+	console.log(req.params);
 	const user = req.body;
 	const newUser = new User(user);
+	console.log(newUser);
 	try {
 		await newUser.save();
 		res.status(201).json(newUser);
