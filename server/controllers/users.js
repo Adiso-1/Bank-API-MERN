@@ -105,6 +105,35 @@ const withdraw = async (req, res) => {
 	}
 };
 
+const transfer = async (req, res) => {
+	const { fromId, toId, cash } = req.query;
+	const fromUser = await User.findOne({ passport_id: fromId });
+	const toUser = await User.findOne({ passport_id: toId });
+	//! check for prerequisite
+	if (!fromUser || !toUser) {
+		return res.status(404).send({ error: 'Error' });
+	}
+	if (fromUser.cash - cash < -fromUser.credit) {
+		return res
+			.status(404)
+			.send({ error: `User doesn't have enough credit to make this transfer` });
+	}
+	const user1 = await User.findOneAndUpdate(
+		{ passport_id: fromId },
+		{ cash: fromUser.cash - cash },
+		{
+			new: true,
+			useFindAndModify: false,
+		}
+	);
+	const user2 = await User.findOneAndUpdate(
+		{ passport_id: toId },
+		{ cash: toUser.cash + Number(cash) },
+		{ new: true, useFindAndModify: false }
+	);
+	res.send([user1, user2]);
+};
+
 const credit = async (req, res) => {
 	const passport_id = req.params.id;
 	const body = req.query;
@@ -131,4 +160,5 @@ module.exports = {
 	deposit,
 	credit,
 	withdraw,
+	transfer,
 };

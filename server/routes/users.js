@@ -10,6 +10,7 @@ const {
 	deposit,
 	credit,
 	withdraw,
+	transfer,
 } = require('../controllers/users.js');
 
 router.get('/:id', getUserById);
@@ -20,5 +21,6 @@ router.put('/update/:id', updateUser);
 router.put('/deposit/:id', deposit);
 router.put('/credit/:id', credit);
 router.put('/withdraw/:id', withdraw);
+router.put('/transfer/', transfer);
 
 module.exports = router;
