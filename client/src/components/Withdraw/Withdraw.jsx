@@ -27,35 +27,33 @@ const Withdraw = () => {
 		}
 	};
 	return (
-		<div>
+		<div className="forms">
 			<h1>Withdraw</h1>
-			<div className="forms">
-				<form>
-					<label htmlFor="id">Enter Id: </label>
-					<input
-						value={id}
-						required={true}
-						onChange={(e) => {
-							setId(e.target.value);
-						}}
-						id="id"
-						type="text"
-					/>
-				</form>
-				<form>
-					<label htmlFor="withdraw">Enter amount to withdraw: </label>
-					<input
-						value={withdraw}
-						required={true}
-						onChange={(e) => {
-							setWithdraw(e.target.value);
-						}}
-						min={0}
-						id="withdraw"
-						type="number"
-					/>
-				</form>
-			</div>
+			<form>
+				<label htmlFor="id">Enter Id: </label>
+				<input
+					value={id}
+					required={true}
+					onChange={(e) => {
+						setId(e.target.value);
+					}}
+					id="id"
+					type="text"
+				/>
+			</form>
+			<form>
+				<label htmlFor="withdraw">Enter amount to withdraw: </label>
+				<input
+					value={withdraw}
+					required={true}
+					onChange={(e) => {
+						setWithdraw(e.target.value);
+					}}
+					min={0}
+					id="withdraw"
+					type="number"
+				/>
+			</form>
 			<Button text="submit" onClick={handleSubmit} />
 			{isWithdraw && <h3>Withdraw successfully fulfilled</h3>}
 			<h3>{errorMsg}</h3>
