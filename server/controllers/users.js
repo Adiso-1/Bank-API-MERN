@@ -52,6 +52,7 @@ const updateUser = async (req, res) => {
 	try {
 		const user = await User.findOneAndUpdate({ passport_id }, body, {
 			new: true,
+			useFindAndModify: false,
 		});
 		if (!user) {
 			return res.status(404).send('user not found');
@@ -61,4 +62,48 @@ const updateUser = async (req, res) => {
 		res.status(400).send('not a valid params, check again');
 	}
 };
-module.exports = { getUsers, createUser, getUserById, deleteUser, updateUser };
+const deposit = async (req, res) => {
+	const passport_id = req.params.id;
+	const body = req.query;
+	try {
+		const tempUser = await User.find({ passport_id });
+		body.cash = Number(body.cash) + Number(tempUser[0].cash);
+		const user = await User.findOneAndUpdate({ passport_id }, body, {
+			new: true,
+			useFindAndModify: false,
+		});
+		if (!user) {
+			return res.status(404).send('user not found');
+		}
+		res.status(200).send(user);
+	} catch (error) {
+		res.status(400).send('not a valid params, check again');
+	}
+};
+
+const credit = async (req, res) => {
+	const passport_id = req.params.id;
+	const body = req.query;
+	try {
+		const user = await User.findOneAndUpdate({ passport_id }, body, {
+			new: true,
+			useFindAndModify: false,
+		});
+		if (!user) {
+			return res.status(404).send('user not found');
+		}
+		res.status(200).send(user);
+	} catch (error) {
+		res.status(400).send('not a valid params, check again');
+	}
+};
+
+module.exports = {
+	getUsers,
+	createUser,
+	getUserById,
+	deleteUser,
+	updateUser,
+	deposit,
+	credit,
+};

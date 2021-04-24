@@ -13,8 +13,7 @@ const UpdateUser = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const data = await api.put(`users/update/${id}`, userData);
-			console.log(data);
+			await api.put(`users/update/${id}`, userData);
 			setUserData({
 				name: '',
 				email: '',

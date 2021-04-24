@@ -8,6 +8,7 @@ const Form = () => {
 		name: '',
 		email: '',
 	});
+	const [isAdd, setIsAdd] = useState(false);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -17,6 +18,11 @@ const Form = () => {
 				name: '',
 				email: '',
 			});
+			setIsAdd(true);
+			setTimeout(() => {
+				console.log('hi');
+				setIsAdd(false);
+			}, 2000);
 		} catch (error) {
 			console.log('Error: ' + error);
 		}
@@ -55,6 +61,8 @@ const Form = () => {
 			/>
 
 			<button type="submit">Submit</button>
+
+			{isAdd && <h2>User updated succesfully</h2>}
 		</form>
 	);
 };
