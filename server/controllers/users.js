@@ -34,8 +34,18 @@ const createUser = async (req, res) => {
 	}
 };
 
-const updateUser = async (req, res) => {
-	const _id = req.params.id;
-	const user = await User.findByIdAndUpdate(_id);
+const deleteUser = async (req, res) => {
+	const passport_id = req.body.id;
+	try {
+		const user = await User.findOneAndDelete({ passport_id });
+		res.status(200).send(user);
+	} catch (error) {
+		res.status(400).send('not a valid params, check again');
+	}
 };
-module.exports = { getUsers, createUser, getUserById, updateUser };
+
+// const updateUser = async (req, res) => {
+// 	const _id = req.params.id;
+// 	const user = await User.findByIdAndUpdate(_id);
+// };
+module.exports = { getUsers, createUser, getUserById, deleteUser };

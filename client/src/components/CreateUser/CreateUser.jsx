@@ -27,7 +27,7 @@ const Form = () => {
 
 			<label htmlFor="passport-id">Passport ID</label>
 			<input
-				value={userData.lname}
+				value={userData.passport_id}
 				required={true}
 				onChange={(e) =>
 					setUserData({ ...userData, passport_id: e.target.value })
@@ -39,7 +39,7 @@ const Form = () => {
 			<label htmlFor="name">Name</label>
 			<input
 				required={true}
-				value={userData.fname}
+				value={userData.name}
 				onChange={(e) => setUserData({ ...userData, name: e.target.value })}
 				id="name"
 				type="text"

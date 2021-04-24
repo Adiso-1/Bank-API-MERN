@@ -18,18 +18,22 @@ const Users = () => {
 
 	useEffect(() => {
 		getUsers();
-	}, []);
+	}, [users]);
 
 	const handleCreate = () => {
 		setIsAddUser(!isAddUser);
 		setIsShowUsers(false);
+		setIsGetUser(false);
 	};
 	const handleShowUsers = () => {
 		setIsShowUsers(!isShowUsers);
 		setIsAddUser(false);
+		setIsGetUser(false);
 	};
 	const handleGetUser = () => {
 		setIsGetUser(!isGetUser);
+		setIsShowUsers(false);
+		setIsAddUser(false);
 	};
 
 	return (
