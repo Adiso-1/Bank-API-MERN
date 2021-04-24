@@ -81,6 +81,30 @@ const deposit = async (req, res) => {
 	}
 };
 
+const withdraw = async (req, res) => {
+	const passport_id = req.params.id;
+	const body = req.query;
+	try {
+		const tempUser = await User.findOne({ passport_id });
+		let usersCurrentMoney = tempUser.cash;
+		if (usersCurrentMoney - body.cash < -tempUser.credit) {
+			return res.status(404).send({ error: 'Dont have enough money' });
+		}
+		usersCurrentMoney -= Number(body.cash);
+		const user = await User.findOneAndUpdate(
+			{ passport_id },
+			{ cash: usersCurrentMoney },
+			{
+				new: true,
+				useFindAndModify: false,
+			}
+		);
+		res.status(200).send(user);
+	} catch (error) {
+		res.status(400).send(error.message);
+	}
+};
+
 const credit = async (req, res) => {
 	const passport_id = req.params.id;
 	const body = req.query;
@@ -106,4 +130,5 @@ module.exports = {
 	updateUser,
 	deposit,
 	credit,
+	withdraw,
 };

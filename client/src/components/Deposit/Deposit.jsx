@@ -21,6 +21,9 @@ const Deposit = () => {
 			}, 2000);
 		} catch (error) {
 			setErrorMsg('Id is invalid');
+			setTimeout(() => {
+				setErrorMsg('');
+			}, 2000);
 		}
 	};
 	return (
@@ -48,7 +51,8 @@ const Deposit = () => {
 							setCash(e.target.value);
 						}}
 						id="cash"
-						type="text"
+						min={0}
+						type="nubmer"
 					/>
 				</form>
 			</div>

@@ -21,6 +21,9 @@ const Credit = () => {
 			}, 2000);
 		} catch (error) {
 			setErrorMsg('Id is invalid');
+			setTimeout(() => {
+				setErrorMsg('');
+			}, 2000);
 		}
 	};
 	return (
@@ -47,13 +50,14 @@ const Credit = () => {
 						onChange={(e) => {
 							setCredit(e.target.value);
 						}}
+						min={0}
 						id="cash"
-						type="text"
+						type="number"
 					/>
 				</form>
 			</div>
 			<Button text="submit" onClick={handleSubmit} />
-			{isDeposit && <h3>Deposit fulfilled</h3>}
+			{isDeposit && <h3>Credit updated</h3>}
 			<h3>{errorMsg}</h3>
 		</div>
 	);
