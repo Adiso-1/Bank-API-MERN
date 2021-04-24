@@ -3,7 +3,10 @@
 	flex-direction: column;
 	width: 50%;
 	margin: 0 auto;
+	line-height: 1.8rem;
 }
 .form-container input {
 	margin-bottom: 10px;
+	font-size: 20px;
+	padding: 0 10px;
 }

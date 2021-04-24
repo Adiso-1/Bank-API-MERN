@@ -25,15 +25,17 @@ const GetUser = () => {
 	};
 
 	return (
-		<div>
+		<div className="search-user-container">
 			<h3>Search by id</h3>
-			<input
-				value={value}
-				onChange={handleChange}
-				type="text"
-				required={true}
-			/>
-			<Button text="Search" onClick={handleSearch} />
+			<div className="search-container">
+				<input
+					value={value}
+					onChange={handleChange}
+					type="text"
+					required={true}
+				/>
+				<Button text="Search" onClick={handleSearch} />
+			</div>
 			{user.length ? (
 				<div>
 					<ul className="user-list">

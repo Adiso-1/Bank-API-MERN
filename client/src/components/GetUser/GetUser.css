@@ -1,3 +1,39 @@
-.user-list {
+.table-list {
+	margin: 0 auto;
+}
+table {
+	border-collapse: collapse;
+	text-align: center;
+}
+td {
+	padding: 10px;
+	border: 1px solid #333;
+}
+.search-user-container {
+	max-width: 500px;
+	margin: 0 auto;
+}
+.search-user-container ul {
 	list-style: none;
+	line-height: 1.5;
+	font-size: 20px;
+}
+.search-user-container ul:last-child {
+	border-bottom: 1px solid #000;
+}
+.search-user-container li {
+	margin: 2px 0;
+	border-top: 1px solid #000;
+}
+.search-container {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	margin: 10px auto;
+}
+.search-container button {
+	margin: 10px 0;
+}
+h3 {
+	font-size: 20px;
 }

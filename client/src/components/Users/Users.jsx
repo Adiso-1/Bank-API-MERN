@@ -54,7 +54,7 @@ const Users = () => {
 
 	return (
 		<div>
-			<div className="buttons">
+			<div className="buttons-container">
 				<Button
 					text={isAddUser ? 'Close add user' : 'Add new user'}
 					onClick={handleCreate}

@@ -9,9 +9,21 @@
 }
 .grid-actions > div {
 	border: 1px solid #000;
-	height: 200px;
+	height: 300px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+form {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0;
+}
+
+@media screen and (max-width: 600px) {
+	.grid-actions {
+		grid-template-columns: repeat(1, 1fr);
+		margin: 10px;
+	}
 }

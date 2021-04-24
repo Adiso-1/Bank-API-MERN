@@ -1,7 +1,9 @@
+import './Home.css';
+
 const Home = () => {
 	return (
-		<div>
-			<h1>Hello, Welcome To Adiso Bank</h1>
+		<div className="home-container">
+			<h1>Hello, Welcome To Adi Investment Bank</h1>
 		</div>
 	);
 };
