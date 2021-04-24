@@ -43,8 +43,19 @@ const deleteUser = async (req, res) => {
 	}
 };
 
-// const updateUser = async (req, res) => {
-// 	const _id = req.params.id;
-// 	const user = await User.findByIdAndUpdate(_id);
-// };
-module.exports = { getUsers, createUser, getUserById, deleteUser };
+const updateUser = async (req, res) => {
+	const passport_id = req.params.id;
+	const body = req.body;
+	try {
+		const user = await User.findOneAndUpdate({ passport_id }, body, {
+			new: true,
+		});
+		if (!user) {
+			return res.status(404).send('user not found');
+		}
+		res.status(200).send(user);
+	} catch (error) {
+		res.status(400).send('not a valid params, check again');
+	}
+};
+module.exports = { getUsers, createUser, getUserById, deleteUser, updateUser };
