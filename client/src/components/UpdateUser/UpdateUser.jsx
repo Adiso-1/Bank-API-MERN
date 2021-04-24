@@ -15,17 +15,17 @@ const UpdateUser = () => {
 		try {
 			const data = await api.put(`users/update/${id}`, userData);
 			console.log(data);
-			// setUserData({
-			// 	name: '',
-			// 	email: '',
-			// });
-			// setId('');
-			// setIsUpdate(true);
-			// setTimeout(() => {
-			// 	setIsUpdate(false);
-			// }, 2000);
+			setUserData({
+				name: '',
+				email: '',
+			});
+			setId('');
+			setIsUpdate(true);
+			setTimeout(() => {
+				setIsUpdate(false);
+			}, 2000);
 		} catch (error) {
-			console.log('Error: ' + error);
+			console.log(error);
 		}
 	};
 	return (

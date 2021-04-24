@@ -37,6 +37,9 @@ const deleteUser = async (req, res) => {
 	const passport_id = req.params.id;
 	try {
 		const user = await User.findOneAndDelete({ passport_id });
+		if (!user) {
+			return res.status(404).send('user not found');
+		}
 		res.status(200).send(user);
 	} catch (error) {
 		res.status(400).send('not a valid params, check again');
