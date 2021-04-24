@@ -22,7 +22,6 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-	console.log(req.params);
 	const user = req.body;
 	const newUser = new User(user);
 	console.log(newUser);
@@ -35,7 +34,7 @@ const createUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-	const passport_id = req.body.id;
+	const passport_id = req.params.id;
 	try {
 		const user = await User.findOneAndDelete({ passport_id });
 		res.status(200).send(user);

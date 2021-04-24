@@ -36,6 +36,11 @@ const Users = () => {
 		setIsAddUser(false);
 	};
 
+	const hanldeDeleteUser = async (e, id) => {
+		const { data } = await api.delete(`users/delete/${id}`);
+		console.log(data);
+	};
+
 	return (
 		<div>
 			<div className="buttons">
@@ -54,24 +59,38 @@ const Users = () => {
 			</div>
 			{isGetUser && <GetUser />}
 			{isAddUser && <CreateForm />}
-			<div className="grid-list">
-				{(isShowUsers &&
-					users.length > 0 &&
-					users.map((user) => {
+			{isShowUsers && (
+				<table className="table-list">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Cash</th>
+							<th>Credit</th>
+						</tr>
+					</thead>
+					{users.map((user) => {
 						return (
-							<div key={user._id}>
-								<ul className="users-list">
-									<li>ID: {user.passport_id}</li>
-									<li>Name: {user.name}</li>
-									<li>Email: {user.email}</li>
-									<li>Cash: {user.cash}</li>
-									<li>Credit: {user.credit}</li>
-								</ul>
-							</div>
+							<tbody key={user._id} className="users-list">
+								<tr>
+									<td>{user.passport_id}</td>
+									<td>{user.name}</td>
+									<td>{user.email}</td>
+									<td>{user.cash}</td>
+									<td>{user.credit}</td>
+									<td>
+										<Button
+											text="Delete"
+											onClick={(e) => hanldeDeleteUser(e, user.passport_id)}
+										/>
+									</td>
+								</tr>
+							</tbody>
 						);
-					})) ||
-					(isShowUsers && <h1>No Users In The Bank</h1>)}
-			</div>
+					})}
+				</table>
+			)}
 		</div>
 	);
 };
