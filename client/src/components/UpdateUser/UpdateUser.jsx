@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import api from '../../api/api';
 import './UpdateUser.css';
 
-const UpdateUser = () => {
+const UpdateUser = (props) => {
 	const [id, setId] = useState('');
 	const [userData, setUserData] = useState({
 		name: '',
@@ -20,6 +20,7 @@ const UpdateUser = () => {
 			});
 			setId('');
 			setIsUpdate(true);
+			props.getUsers();
 			setTimeout(() => {
 				setIsUpdate(false);
 			}, 2000);

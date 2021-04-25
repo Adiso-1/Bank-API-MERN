@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import api from '../../api/api';
 import './CreateUser.css';
 
-const Form = () => {
+const Form = (props) => {
 	const [userData, setUserData] = useState({
 		passport_id: '',
 		name: '',
@@ -19,8 +19,8 @@ const Form = () => {
 				email: '',
 			});
 			setIsAdd(true);
+			props.getUsers();
 			setTimeout(() => {
-				console.log('hi');
 				setIsAdd(false);
 			}, 2000);
 		} catch (error) {

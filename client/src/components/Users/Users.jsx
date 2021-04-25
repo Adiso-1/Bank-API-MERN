@@ -48,8 +48,10 @@ const Users = () => {
 	};
 
 	const hanldeDeleteUser = async (e, id) => {
-		const { data } = await api.delete(`users/delete/${id}`);
-		console.log(data);
+		await api.delete(`users/delete/${id}`);
+		getUsers();
+		// const { data } = await api.get('users');
+		// setUsers(data);
 	};
 
 	return (
@@ -73,8 +75,8 @@ const Users = () => {
 				/>
 			</div>
 			{isGetUser && <GetUser />}
-			{isUpdateUser && <UpdateUser />}
-			{isAddUser && <CreateForm />}
+			{isUpdateUser && <UpdateUser getUsers={getUsers} />}
+			{isAddUser && <CreateForm getUsers={getUsers} />}
 			{isShowUsers && (
 				<table className="table-list">
 					<thead>

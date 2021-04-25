@@ -11,7 +11,7 @@ const Transfer = () => {
 
 	const handleSubmit = async () => {
 		try {
-			const { data } = await api.put(
+			await api.put(
 				`users/transfer?fromId=${fromId}&toId=${toId}&cash=${transfer}`
 			);
 			setFromId('');
